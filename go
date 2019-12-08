@@ -6,4 +6,4 @@ else
     echo "filterdata.csv" already exists! Using the current data file ...
     echo
 fi
-python ./run.py
+python ./run.py cat
