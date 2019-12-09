@@ -19,11 +19,10 @@ if __name__ == '__main__':
     with open("filterdata.csv") as f:
         count = 0
         reader = csv.DictReader(f)
-        for data in reader:
+        for source in reader:
             count = count + 1
-            inputdata = "{} {} {} {}".format(data['JName'], data['Age'],
-                                             data['Dist'], data['Edot'])
+            data = "{} {} {} {}".format(source['JName'], source['Age'],
+                                        source['Dist'], source['Edot'])
             logging.info("Running source {}".format(count))
-            logging.info(inputdata)
-            p = run([sys.argv[1]], input=inputdata, encoding='ascii')
-            print()
+            logging.info(data)
+            p = run([sys.argv[1]], input=data, encoding='ascii')
