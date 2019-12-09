@@ -72,13 +72,12 @@ def request_data(coor1, coor2, r):
                 # convert unit from erg/s to m_e c^2/s
                 Edot = float(data['EDOT']) * 1221432.8760283517
                 Dist = float(data['DIST'])
-                if Dist > 2:
+                Age = float(data['AGE'])
+                if Dist > 2 or Age < 1e5:
                     continue
                 filtercount = filtercount + 1
                 writer.writerow({'JName': data['PSRJ'],
-                                 'Age': data['AGE'],
-                                 'Dist': data['DIST'],
-                                 'Edot': Edot})
+                                 'Age': Age, 'Dist': Dist, 'Edot': Edot})
         logging.info("Data saved!")
         logging.info("Total: %d, filtered: %d" % (rawcount, filtercount))
 
