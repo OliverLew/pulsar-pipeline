@@ -25,7 +25,7 @@ def request_data(coor1, coor2, r):
         "sort_order": "asc",
         "condition": "",
         "ephemeris": "short",
-        "coords_unit": "raj/decj",
+        "coords_unit": "rajd/decjd",
         "radius": r,
         "coords_1": coor1,
         "coords_2": coor2,
