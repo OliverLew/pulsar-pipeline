@@ -87,8 +87,8 @@ def request_data(coor1, coor2, r):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-c', '--coor', nargs=2, metavar=("RaJ", "DecJ"))
-    parser.add_argument('-r', '--radius', nargs=1, metavar="Radius")
+    parser.add_argument('-c', '--coor', nargs=2, metavar=("Ra/deg", "Dec/deg"))
+    parser.add_argument('-r', '--radius', nargs=1, metavar="Radius/deg")
     args = parser.parse_args()
 
     request_data(args.coor[0], args.coor[1], args.radius)
