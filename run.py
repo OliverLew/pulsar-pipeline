@@ -21,8 +21,9 @@ if __name__ == '__main__':
         reader = csv.DictReader(f)
         for source in reader:
             count = count + 1
-            data = "{} {} {} {}".format(source['JName'], source['Age'],
-                                        source['Dist'], source['Edot'])
-            logging.info("Running source {}".format(count))
-            logging.info(data)
-            p = run([sys.argv[1]], input=data, encoding='ascii')
+            for alpha in [1.1, 1.3, 1.5, 1.7, 1.9, 2.1, 2.3, 2.5]:
+                data = "{} {} {} {}".format(source['Age'], source['Dist'],
+                                            source['Edot'], alpha)
+                logging.info("Running source {}".format(count))
+                logging.info(data)
+                p = run([sys.argv[1]], input=data, encoding='ascii')
