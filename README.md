@@ -5,9 +5,14 @@ WIP
 current workflow:
 
 ```sh
-python fetchdata.py -c <ra> <dec> -r <radius>
 gfortran FVM.f90 -o FVM
-python run.py FVM
+python ./fetchdata.py -c <ra> <dec> -r <radius>
+python ./run.py ./FVM [-j <threads>]
+python ./plot.py
 ```
 
-Or use the wrapping script `go`, change the parameters within it.
+Or use the wrapping script `go`:
+
+```sh
+./go [<ra> <dec> <radius>] [-j <threads>]
+```
