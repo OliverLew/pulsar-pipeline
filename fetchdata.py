@@ -55,6 +55,10 @@ def request_data(coor1, coor2, r):
         logging.error("Download failed, please re-run the script")
         exit(1)
 
+    return rawdata
+
+
+def save_data(rawdata):
     with open("rawdata.csv", "w") as f:
         f.write(rawdata)
 
@@ -66,8 +70,10 @@ def request_data(coor1, coor2, r):
         writer.writeheader()
         reader = csv.DictReader(rawdata, delimiter=';')
         for data in reader:
+            if not data['#']:
+                continue
             rawcount = rawcount + 1
-            if data['#'] and data['DIST'] != '*' and data['AGE'] != '*' \
+            if data['DIST'] != '*' and data['AGE'] != '*' \
                     and data['EDOT'] != '*':
                 if float(data['DIST']) > 2 or float(data['AGE']) < 1e4:
                     continue
@@ -91,4 +97,5 @@ if __name__ == '__main__':
     parser.add_argument('-r', '--radius', nargs=1, metavar="Radius/deg")
     args = parser.parse_args()
 
-    request_data(args.coor[0], args.coor[1], args.radius)
+    rawdata = request_data(args.coor[0], args.coor[1], args.radius)
+    save_data(rawdata)
