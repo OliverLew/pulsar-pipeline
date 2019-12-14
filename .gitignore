@@ -2,6 +2,7 @@
 *.txt
 *.eps
 *.pdf
+*.png
 *.mod
 *log
 test*
