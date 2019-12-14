@@ -2,6 +2,7 @@
 # NOTE: The whole database could also be downloaded from website:
 # https://www.atnf.csiro.au/research/pulsar/psrcat/download.html
 
+# TODO: multiple jobs
 import os
 import csv
 import logging
@@ -9,7 +10,7 @@ import argparse
 import requests
 from bs4 import BeautifulSoup
 
-logging.basicConfig(level=logging.INFO, format="%(message)s")
+logging.basicConfig(level=logging.INFO, format="%(filename)s: %(message)s")
 
 
 def request_data(coor1, coor2, r):

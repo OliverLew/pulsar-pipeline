@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import os
-import sys
 import csv
 import logging
 import argparse
@@ -13,10 +12,10 @@ logging.basicConfig(level=logging.INFO, format="%(filename)s: %(message)s")
 def runeach(source, alpha):
     data = "{} {} {} {}".format(source['Age'], source['Dist'],
                                 source['Edot'], alpha)
-    logging.info("Running source {}".format(source['JName']))
-    logging.info(data)
-    p = run([args.bin], stdout=PIPE,
-            input=data, encoding='ascii')
+    logging.info("Running source {}, alpha={}".format(source['JName'], alpha))
+    logging.info("input: {}".format(data))
+
+    p = run([args.bin], stdout=PIPE, input=data, encoding='ascii')
 
     difelec_file = "{}-{}.txt".format(source['JName'], alpha)
     with open(os.path.join(outputdir, difelec_file), 'w') as f:
