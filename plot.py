@@ -22,8 +22,11 @@ if __name__ == '__main__':
             plt.ylabel('flux')
             for txt in os.listdir(outputdir):
                 if txt.startswith(name):
+                    alpha = float(txt[len(name) + 1: -4])
                     # filter data below floating point precision
                     E, flux = np.loadtxt(os.path.join(outputdir, txt)).T
-                    plt.plot(E[flux > 1e-308], flux[flux > 1e-308])
+                    plt.plot(E[flux > 1e-308], flux[flux > 1e-308],
+                             label='$\\alpha={}$'.format(alpha))
+            plt.legend()
             plt.savefig(os.path.join(plotdir, "{}.eps".format(name)))
             plt.close()
