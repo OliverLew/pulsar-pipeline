@@ -15,8 +15,10 @@ PROGRAM Main
    Real*8 E(Edim), D(Rdim, Edim), N(Rdim, Edim), R(Rdim + 1)
    integer ir, ie, nrp
 
-   open(11,file='log',status="unknown")
-   Read (5, *) Tage, Dist, Edot, alpha!Tage in s; Dist in pc; Edot in mec^2
+   character(80) JName, logfile
+   Read (5, *) JName, Tage, Dist, Edot, alpha!Tage in s; Dist in pc; Edot in mec^2
+   write(logfile, "(A,A,A,F3.1,A)") "result/log/", trim(JName), "-", alpha, ".log"
+   open(11,file=logfile,status="unknown")
    nrp = ifix(sngl(Dist))
    ! dt = 10d0*ytos
    dt = Tage / 200d0

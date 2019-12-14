@@ -10,8 +10,8 @@ logging.basicConfig(level=logging.INFO, format="%(filename)s: %(message)s")
 
 
 def runeach(source, alpha):
-    data = "{} {} {} {}".format(source['Age'], source['Dist'],
-                                source['Edot'], alpha)
+    data = "{} {} {} {} {}".format(source['JName'], source['Age'],
+                                   source['Dist'], source['Edot'], alpha)
     logging.info("Running source {}, alpha={}".format(source['JName'], alpha))
     logging.info("input: {}".format(data))
 
