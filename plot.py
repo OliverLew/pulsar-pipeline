@@ -2,7 +2,9 @@
 import os
 import csv
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt  # noqa
 
 
 if __name__ == '__main__':
@@ -16,19 +18,20 @@ if __name__ == '__main__':
         for source in csv.DictReader(f):
             name = source['JName']
             plt.figure(figsize=(8, 6))
-            plt.title(name)
+            plt.title('Source: {}'.format(name))
             plt.xscale('log')
             plt.yscale('log')
-            plt.xlabel('$E$  ($m_ec^2/\\mathrm{s}$)')
-            plt.ylabel('flux')
+            plt.xlabel('$E$')
+            plt.ylabel('$E^{3}flux$')
             for txt in os.listdir(outputdir):
                 if txt.startswith(name):
                     alpha = float(txt[len(name) + 1: -4])
                     # filter data below floating point precision
                     E, flux = np.loadtxt(os.path.join(outputdir, txt)).T
-                    plt.plot(E[flux > 1e-308], flux[flux > 1e-308],
+                    E3flux = flux * E**3
+                    plt.plot(E[flux > 1e-308], E3flux[flux > 1e-308],
                              label='$\\alpha={}$'.format(alpha))
-            plt.legend()
+            plt.legend(framealpha=1)
             plt.savefig(os.path.join(plotdir, "{}.png".format(name)))
             plt.savefig(os.path.join(plotdir, "{}.eps".format(name)))
             plt.close()
