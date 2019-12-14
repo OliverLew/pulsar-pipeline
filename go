@@ -37,7 +37,7 @@ if not os.path.exists("filterdata.csv"):
 else:
     logging.info("filterdata.csv exists! Using the current data file ...")
 
-if subprocess.run(["gfortran", "./FVM.g90"]).returncode:
+if subprocess.run(["gfortran", "./FVM.f90"]).returncode:
     exit(1)
 
 if args.threads:
