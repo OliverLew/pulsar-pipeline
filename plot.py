@@ -15,6 +15,7 @@ if __name__ == '__main__':
     with open("filterdata.csv") as f:
         for source in csv.DictReader(f):
             name = source['JName']
+            plt.figure(figsize=(8, 6))
             plt.title(name)
             plt.xscale('log')
             plt.yscale('log')
@@ -28,5 +29,6 @@ if __name__ == '__main__':
                     plt.plot(E[flux > 1e-308], flux[flux > 1e-308],
                              label='$\\alpha={}$'.format(alpha))
             plt.legend()
+            plt.savefig(os.path.join(plotdir, "{}.png".format(name)))
             plt.savefig(os.path.join(plotdir, "{}.eps".format(name)))
             plt.close()
