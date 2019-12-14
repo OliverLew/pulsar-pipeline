@@ -18,7 +18,8 @@ PROGRAM Main
    open(11,file='log',status="unknown")
    Read (5, *) Tage, Dist, Edot, alpha!Tage in s; Dist in pc; Edot in mec^2
    nrp = ifix(sngl(Dist))
-   dt = 10d0*ytos
+   ! dt = 10d0*ytos
+   dt = Tage / 200d0
    Do ir = 1, Rdim + 1
       R(ir) = dble(ir - 1)*dr
    End Do
