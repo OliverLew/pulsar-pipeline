@@ -21,7 +21,8 @@ def ploteach(source):
             # filter data below floating point precision
             E, flux = np.loadtxt(os.path.join(outputdir, txt)).T
             E3flux = flux * E**3
-            plt.plot(E[flux > 1e-308], E3flux[flux > 1e-308],
+            mask = (flux > 1e-308) * (E > 1e5)
+            plt.plot(E[mask], E3flux[mask],
                      label='$\\alpha={}$'.format(alpha))
     plt.legend(framealpha=1)
     plt.savefig(os.path.join(plotdir, "{}.png".format(name)))
