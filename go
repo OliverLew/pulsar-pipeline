@@ -29,17 +29,21 @@ parser.add_argument('-j', '--threads', help="default to maximum available")
 args = parser.parse_args()
 
 if not os.path.exists("filterdata.csv"):
+    logging.info("Downloading new data")
     p = subprocess.run(["python", "./fetchdata.py",
                         "-c", args.ra, args.dec,
                         "-r", args.radius])
     if p.returncode:
+        logging.error("Error downloading data!")
         exit(p.returncode)
 else:
     logging.info("filterdata.csv exists! Using the current data file ...")
 
+logging.info("Compiling source code")
 if subprocess.run(["gfortran", "./FVM.f90"]).returncode:
     exit(1)
 
+logging.info("Running calculations for all sources")
 if args.threads:
     p = subprocess.run(["python", "./run.py", "./FVM", "-j", args.threads])
 else:
@@ -48,4 +52,5 @@ else:
 if p.returncode:
     exit(p.returncode)
 
+logging.info("Generating plots and report")
 subprocess.run(["python", "./plot.py"])
