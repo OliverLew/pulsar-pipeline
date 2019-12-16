@@ -21,6 +21,8 @@ def request_data(coor1, coor2, r):
         "Dist": "Dist",
         "Age": "Age",
         "Edot": "Edot",
+        "RaJD": "RaJD",
+        "DecJD": "DecJD",
         "startUserDefined": "true",
         "sort_attr": "jname",
         "sort_order": "asc",
@@ -66,7 +68,7 @@ def save_data(rawdata):
     with open("rawdata.csv") as rawdata, open("filterdata.csv", "w") as f:
         rawcount = 0
         filtercount = 0
-        fields = ['JName', 'Age', 'Dist', 'Edot']
+        fields = ['JName', 'Age', 'Dist', 'Edot', 'RaJD', 'DecJD']
         writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()
         reader = csv.DictReader(rawdata, delimiter=';')
@@ -79,6 +81,8 @@ def save_data(rawdata):
                 if float(data['DIST']) > 2 or float(data['AGE']) < 1e4:
                     continue
                 filtercount = filtercount + 1
+                RaJD = float(data['RAJD'])
+                DecJD = float(data['DECJD'])
                 # convert unit from erg/s to m_e c^2/s
                 Edot = float(data['EDOT']) * 1221432.8760283517
                 # convert unit from kpc to pc
@@ -87,7 +91,8 @@ def save_data(rawdata):
                 Age = float(data['AGE']) * 365.25 * 24 * 60 * 60
 
                 writer.writerow({'JName': data['PSRJ'],
-                                 'Age': Age, 'Dist': Dist, 'Edot': Edot})
+                                 'Age': Age, 'Dist': Dist, 'Edot': Edot,
+                                 'RaJD': RaJD, 'DecJD': DecJD})
         logging.info("Data saved!")
         logging.info("Total: %d, filtered: %d" % (rawcount, filtercount))
 
