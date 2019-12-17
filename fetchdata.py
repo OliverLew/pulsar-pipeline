@@ -65,22 +65,17 @@ def save_data(rawdata):
     with open("rawdata.csv", "w") as f:
         f.write(rawdata)
 
-    with open("rawdata.csv") as rawdata, open("filterdata.csv", "w") as f:
-        rawcount = 0
-        filtercount = 0
+    with open("rawdata.csv") as rawdata, open("data.csv", "w") as f:
+        count = 0
         fields = ['JName', 'Age', 'Dist', 'Edot', 'RaJD', 'DecJD']
         writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()
-        reader = csv.DictReader(rawdata, delimiter=';')
-        for data in reader:
+        for data in csv.DictReader(rawdata, delimiter=';'):
             if not data['#']:
                 continue
-            rawcount = rawcount + 1
+            count += 1
             if data['DIST'] != '*' and data['AGE'] != '*' \
                     and data['EDOT'] != '*':
-                if float(data['DIST']) > 2 or float(data['AGE']) < 1e4:
-                    continue
-                filtercount = filtercount + 1
                 RaJD = float(data['RAJD'])
                 DecJD = float(data['DECJD'])
                 # convert unit from erg/s to m_e c^2/s
@@ -94,7 +89,7 @@ def save_data(rawdata):
                                  'Age': Age, 'Dist': Dist, 'Edot': Edot,
                                  'RaJD': RaJD, 'DecJD': DecJD})
         logging.info("Data saved!")
-        logging.info("Total: %d, filtered: %d" % (rawcount, filtercount))
+        logging.info("Total: %d" % (count))
 
 
 if __name__ == '__main__':

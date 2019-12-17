@@ -29,8 +29,8 @@ if __name__ == '__main__':
     parser.add_argument('-j', '--threads', type=int)
     args = parser.parse_args()
 
-    if not os.path.exists("filterdata.csv"):
-        logging.error("\"filterdata.csv\" does not exist, run fetchdata.py")
+    if not os.path.exists("data.csv"):
+        logging.error("\"data.csv\" does not exist, run fetchdata.py")
         exit(1)
 
     resultdir = "result"
@@ -46,8 +46,10 @@ if __name__ == '__main__':
         num_threads = mp.cpu_count()
     pool = mp.Pool(num_threads)
 
-    with open("filterdata.csv") as f:
+    with open("data.csv") as f:
         for source in csv.DictReader(f):
+            if float(source['Dist']) > 2 or float(source['Age']) < 1e4:
+                continue
             for alpha in [1.1, 1.3, 1.5, 1.7, 1.9, 2.1, 2.3, 2.5]:
                 pool.apply_async(runeach, args=(source, alpha))
                 # single thread

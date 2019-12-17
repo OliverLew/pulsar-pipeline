@@ -28,7 +28,7 @@ parser.add_argument('radius', nargs="?", default="2", help="unit: degree")
 parser.add_argument('-j', '--threads', help="default to maximum available")
 args = parser.parse_args()
 
-if not os.path.exists("filterdata.csv"):
+if not os.path.exists("data.csv"):
     logging.info("Downloading new data")
     p = subprocess.run(["python", "./fetchdata.py",
                         "-c", args.ra, args.dec,
@@ -37,7 +37,7 @@ if not os.path.exists("filterdata.csv"):
         logging.error("Error downloading data!")
         exit(p.returncode)
 else:
-    logging.info("filterdata.csv exists! Using the current data file ...")
+    logging.info("data.csv exists! Using the current data file ...")
 
 logging.info("Compiling source code")
 if subprocess.run(["gfortran", "./FVM.f90"]).returncode:
