@@ -98,6 +98,7 @@ if __name__ == '__main__':
     parser.add_argument('-r', '--radius', nargs=1, metavar="Radius/deg")
     args = parser.parse_args()
 
-    resultdir = "result"
+    currentdir = os.path.dirname(__file__)
+    resultdir = os.path.join(currentdir, "result")
     rawdata = request_data(args.coor[0], args.coor[1], args.radius)
     save_data(rawdata)

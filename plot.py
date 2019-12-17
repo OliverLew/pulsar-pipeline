@@ -34,13 +34,16 @@ def ploteach(source):
 
 
 if __name__ == '__main__':
-    resultdir = "result"
+    currentdir = os.path.dirname(__file__)
+    resultdir = os.path.join(currentdir, "result")
     outputdir = os.path.join(resultdir, "output")
     plotdir = os.path.join(resultdir, "plots")
-    if not os.path.exists(plotdir):
-        os.mkdir(plotdir)
+    texdir = os.path.join(resultdir, "tex")
+    for d in [plotdir, texdir]:
+        if not os.path.exists(d):
+            os.mkdir(d)
 
-    with open("jobfile") as f:
+    with open(os.path.join(currentdir, "jobfile")) as f:
         ra0, dec0, radius = [float(i) for i in f.read().split()]
 
     with open(os.path.join(resultdir, "data.csv")) as f:
@@ -63,4 +66,4 @@ if __name__ == '__main__':
             plt.annotate(source['JName'], xy=(ra, dec),
                          xytext=(ra + radius / 50, dec + radius / 50))
         plt.legend([accepted, filtered], ['used', 'not used'], framealpha=1)
-        plt.savefig(os.path.join(resultdir, "position.eps"))
+        plt.savefig(os.path.join(plotdir, "position.eps"))

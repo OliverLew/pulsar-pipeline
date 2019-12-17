@@ -30,6 +30,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     resultdir = "result"
+    currentdir = os.path.dirname(__file__)
+    resultdir = os.path.join(currentdir, "result")
     outputdir = os.path.join(resultdir, "output")
     logdir = os.path.join(resultdir, "log")
     for d in [resultdir, outputdir, logdir]:
