@@ -14,5 +14,5 @@ python ./plot.py
 Or use the wrapping script `go`:
 
 ```sh
-./go [<ra> <dec> <radius>] [-j <threads>]
+./go <ra> <dec> <radius> [-j <threads>]
 ```
