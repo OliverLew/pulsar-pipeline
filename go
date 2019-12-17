@@ -43,7 +43,7 @@ else:
     logging.info("data.csv exists! Using the current data file ...")
 
 logging.info("Compiling source code")
-if subprocess.run(["gfortran", "./FVM.f90"]).returncode:
+if subprocess.run(["gfortran", "./FVM.f90", "-o", "FVM"]).returncode:
     exit(1)
 
 logging.info("Running calculations for all sources")
