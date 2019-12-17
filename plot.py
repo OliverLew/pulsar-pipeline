@@ -43,7 +43,7 @@ if __name__ == '__main__':
     with open("jobfile") as f:
         ra0, dec0, radius = [float(i) for i in f.read().split()]
 
-    with open("data.csv") as f:
+    with open(os.path.join(resultdir, "data.csv")) as f:
         plt.figure()
         plt.title("Ra: ${}^\\circ$, Dec: ${}^\\circ$, radius: ${}^\\circ$"
                   .format(ra0, dec0, radius))
@@ -63,4 +63,4 @@ if __name__ == '__main__':
             plt.annotate(source['JName'], xy=(ra, dec),
                          xytext=(ra + radius / 50, dec + radius / 50))
         plt.legend([accepted, filtered], ['used', 'not used'], framealpha=1)
-        plt.savefig("position.eps")
+        plt.savefig(os.path.join(resultdir, "position.eps"))

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # NOTE: The whole database could also be downloaded from website:
 # https://www.atnf.csiro.au/research/pulsar/psrcat/download.html
+import os
 import csv
 import logging
 import argparse
@@ -59,10 +60,12 @@ def request_data(coor1, coor2, r):
 
 
 def save_data(rawdata):
-    with open("rawdata.csv", "w") as f:
+    rawdata_file = os.path.join(resultdir, "rawdata.csv")
+    data_file = os.path.join(resultdir, "data.csv")
+    with open(rawdata_file, "w") as f:
         f.write(rawdata)
 
-    with open("rawdata.csv") as rawdata, open("data.csv", "w") as f:
+    with open(rawdata_file) as rawdata, open(data_file, "w") as f:
         count = 0
         fields = ['JName', 'Age', 'Dist', 'Edot', 'RaJD', 'DecJD']
         writer = csv.DictWriter(f, fieldnames=fields)
@@ -95,5 +98,6 @@ if __name__ == '__main__':
     parser.add_argument('-r', '--radius', nargs=1, metavar="Radius/deg")
     args = parser.parse_args()
 
+    resultdir = "result"
     rawdata = request_data(args.coor[0], args.coor[1], args.radius)
     save_data(rawdata)

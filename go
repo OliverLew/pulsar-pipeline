@@ -31,7 +31,7 @@ args = parser.parse_args()
 with open("jobfile", "w") as f:
     f.write("{} {} {}".format(args.ra, args.dec, args.radius))
 
-if not os.path.exists("data.csv"):
+if not os.path.exists(os.path.join("result", "data.csv")):
     logging.info("Downloading new data")
     p = subprocess.run(["python", "./fetchdata.py",
                         "-c", args.ra, args.dec,
