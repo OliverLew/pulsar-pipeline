@@ -37,6 +37,27 @@ if __name__ == '__main__':
     if not os.path.exists(plotdir):
         os.mkdir(plotdir)
 
-    with open("filterdata.csv") as f:
+    with open("jobfile") as f:
+        ra0, dec0, radius = [float(i) for i in f.read().split()]
+
+    with open("data.csv") as f:
+        plt.figure()
+        plt.title("Ra: ${}^\\circ$, Dec: ${}^\\circ$, radius: ${}^\\circ$"
+                  .format(ra0, dec0, radius))
+        plt.xlim((ra0 - radius, ra0 + radius))
+        plt.ylim((dec0 - radius, dec0 + radius))
+        plt.grid(lw=0.5, ls='--')
         for source in csv.DictReader(f):
-            ploteach(source)
+            ra = float(source['RaJD'])
+            dec = float(source['DecJD'])
+            dist = float(source['Dist'])
+            age = float(source['Age'])
+            if dist > 2e3 or age < 1e4 * 365 * 24 * 60 * 60:
+                filtered, = plt.plot(ra, dec, 'ro')
+            else:
+                accepted, = plt.plot(ra, dec, 'go')
+                ploteach(source)
+            plt.annotate(source['JName'], xy=(ra, dec),
+                         xytext=(ra + radius / 50, dec + radius / 50))
+        plt.legend([accepted, filtered], ['used', 'not used'], framealpha=1)
+        plt.savefig("position.eps")

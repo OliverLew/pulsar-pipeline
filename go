@@ -28,6 +28,9 @@ parser.add_argument('radius', nargs="?", default="2", help="unit: degree")
 parser.add_argument('-j', '--threads', help="default to maximum available")
 args = parser.parse_args()
 
+with open("jobfile", "w") as f:
+    f.write("{} {} {}".format(args.ra, args.dec, args.radius))
+
 if not os.path.exists("data.csv"):
     logging.info("Downloading new data")
     p = subprocess.run(["python", "./fetchdata.py",
@@ -53,4 +56,4 @@ if p.returncode:
     exit(p.returncode)
 
 logging.info("Generating plots and report")
-subprocess.run(["python", "./plot.py"])
+subprocess.run(["python", "./plot.py", args.ra, args.dec, args.radius])
