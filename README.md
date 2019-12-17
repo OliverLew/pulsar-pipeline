@@ -19,7 +19,7 @@ all the generated files will be stored in a new `result` folder:
 - **`log/`**: program logging output
 - **`output/`**: program generated data
 - **`plots/`**: individual plots
-- **`tex/`**: latex files
+- **`tex/`**: latex files for final report
 
 ## Usage
 
@@ -33,7 +33,7 @@ It accepts three positional arguments: center coordinates `ra`, `dec` and search
 
 **Note** that by default the pipeline will use all threads available.
 
-The commands below is equivalent to what happens under the hood step by step:
+The commands below are equivalent to what happens under the hood step by step:
 
 ```sh
 gfortran FVM.f90 -o FVM
