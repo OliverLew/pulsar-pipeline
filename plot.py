@@ -55,7 +55,7 @@ if __name__ == '__main__':
             dec = float(source['DecJD'])
             dist = float(source['Dist'])
             age = float(source['Age'])
-            if dist > 2e3 or age < 1e4 * 365 * 24 * 60 * 60:
+            if dist > 2e3 or age < 1e4 * 365.25 * 24 * 60 * 60:
                 filtered, = plt.plot(ra, dec, 'ro')
             else:
                 accepted, = plt.plot(ra, dec, 'go')
