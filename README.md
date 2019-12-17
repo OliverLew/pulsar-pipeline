@@ -1,5 +1,9 @@
 # pulsar-pipeline
 
+A small pipeline program for class. Given the search area, the pipeline will look for pulsars in that area from [ATNF pulsar catelogue](https://www.atnf.csiro.au/research/pulsar/psrcat/) and calculate the expected electron (or positron) spectra.
+
+Reference article: [Fang K., Bi X.-J., Yin P.-F., Yuan Q., 2018, ApJ, 863, 30](https://doi.org/10.3847/1538-4357/aad092)
+
 ## Requirement
 
 - python modules:
@@ -41,3 +45,8 @@ python ./fetchdata.py -c <ra> <dec> -r <radius>
 python ./run.py ./FVM [-j <threads>]
 python ./plot.py
 ```
+
+## Credits
+
+Bao Yiwei: the core fortran program to do the numerical calculation.
+Lu Xu: python scripts to download data, start calculation and generate report pdf file.
