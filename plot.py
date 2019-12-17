@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO, format="%(filename)s: %(message)s")
 def ploteach(source):
     name = source['JName']
     plt.figure(figsize=(8, 6))
-    plt.title('Source: {}'.format(name))
+    plt.title('Source: ${}$'.format(name))
     plt.xscale('log')
     plt.yscale('log')
     plt.xlabel('$E$')
