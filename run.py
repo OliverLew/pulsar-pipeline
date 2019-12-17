@@ -52,7 +52,6 @@ if __name__ == '__main__':
                 continue
             for alpha in [1.1, 1.3, 1.5, 1.7, 1.9, 2.1, 2.3, 2.5]:
                 pool.apply_async(runeach, args=(source, alpha))
-                # single thread
-                #  runeach(source, alpha)
+
     pool.close()
     pool.join()

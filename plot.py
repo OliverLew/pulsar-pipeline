@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 import os
 import csv
+import logging
 import numpy as np
 import matplotlib as mpl
 mpl.use('Agg')
 import matplotlib.pyplot as plt  # noqa
+
+logging.basicConfig(level=logging.INFO, format="%(filename)s: %(message)s")
 
 
 def ploteach(source):
