@@ -6,5 +6,6 @@
 *.mod
 *log
 test*
+report*
 FVM
 jobfile
