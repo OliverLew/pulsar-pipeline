@@ -12,6 +12,7 @@ Reference article: [Fang K., Bi X.-J., Yin P.-F., Yuan Q., 2018, ApJ, 863, 30](h
   - requests
   - beautifulsoup4
 - gfortran
+- latex compiler (pdflatex)
 
 ## Output
 
