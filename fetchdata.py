@@ -98,6 +98,13 @@ if __name__ == '__main__':
     parser.add_argument('-r', '--radius', nargs=1, metavar="Radius/deg")
     args = parser.parse_args()
 
+    if not 0 < float(args.coor[0]) < 360:
+        logging.error("<ra> should be within (0, 360) degrees")
+        exit(1)
+    if not -90 < float(args.coor[1]) < 90:
+        logging.error("<dec> should be within (-90, 90) degrees")
+        exit(1)
+
     currentdir = os.path.dirname(__file__)
     resultdir = os.path.join(currentdir, "result")
     if not os.path.exists(resultdir):
