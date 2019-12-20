@@ -17,8 +17,8 @@ def ploteach(source):
     plt.title('Source: ${}$'.format(name))
     plt.xscale('log')
     plt.yscale('log')
-    plt.xlabel('$E$')
-    plt.ylabel('$E^{3}flux$')
+    plt.xlabel('$E \\quad(m_ec^2)$')
+    plt.ylabel('$E^{3}N \\quad(m_e^2c^4 \\mathrm{cm}^{-3})$')
     for txt in os.listdir(outputdir):
         if txt.startswith(name):
             alpha = float(txt[len(name) + 1: -4])
