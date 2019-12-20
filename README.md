@@ -14,18 +14,6 @@ Reference article: [Fang K., Bi X.-J., Yin P.-F., Yuan Q., 2018, ApJ, 863, 30](h
 - gfortran
 - latex compiler (pdflatex)
 
-## Output
-
-all the generated files will be stored in a new `result` folder:
-
-- **`report.pdf`**: generated report, final product
-- **`rawdata.csv`**: fetched pulsar data
-- **`data.csv`**: pulsar data formatted for easy use in calculation
-- **`log/`**: program logging output
-- **`output/`**: program generated data
-- **`plots/`**: individual plots
-- **`tex/`**: latex files for final report
-
 ## Usage
 
 The script `pulsar-pipeline` is a wrap scrip around all other programs:
@@ -46,6 +34,18 @@ python ./fetchdata.py -c <ra> <dec> -r <radius>
 python ./run.py ./FVM [-j <threads>]
 python ./plot.py
 ```
+
+## Output
+
+all the generated files will be stored in a new `result` folder:
+
+- **`report.pdf`**: generated report, final product
+- **`rawdata.csv`**: fetched pulsar data
+- **`data.csv`**: pulsar data formatted for easy use in calculation
+- **`log/`**: program logging output
+- **`output/`**: program generated data
+- **`plots/`**: individual plots
+- **`tex/`**: latex files for final report
 
 ## Credits
 
