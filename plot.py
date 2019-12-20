@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib as mpl
 mpl.use('Agg')
 import matplotlib.pyplot as plt  # noqa
-from subprocess import run, DEVNULL, PIPE  # noqa
+from subprocess import run, PIPE  # noqa
 
 logging.basicConfig(level=logging.INFO, format="%(filename)s: %(message)s")
 
@@ -60,6 +60,7 @@ class Pdf():
                                        "$(m_ec^2/s)$",
                                        "(degree)",
                                        "(degree)"])
+
     def addtablerow(self, data):
         self.tablerows.append(" & ".join(list(data)))
 
@@ -86,7 +87,7 @@ class Pdf():
                 stdout=PIPE, stderr=PIPE)
         if p.returncode:
             logging.error(p.stdout.decode("utf-8"))
-            logging.error(p.stderr)
+            logging.error(p.stderr.decode("utf-8"))
             logging.error("pdf compile failed")
         else:
             os.rename(os.path.join(texdir, "report.pdf"),
