@@ -56,4 +56,4 @@ if p.returncode:
     exit(p.returncode)
 
 logging.info("Generating plots and report")
-subprocess.run(["python", "./plot.py", args.ra, args.dec, args.radius])
+subprocess.run(["python", "./plot.py"])
