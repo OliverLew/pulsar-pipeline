@@ -100,5 +100,8 @@ if __name__ == '__main__':
 
     currentdir = os.path.dirname(__file__)
     resultdir = os.path.join(currentdir, "result")
+    if not os.path.exists(resultdir):
+        os.mkdir(resultdir)
+
     rawdata = request_data(args.coor[0], args.coor[1], args.radius)
     save_data(rawdata)
