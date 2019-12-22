@@ -16,7 +16,7 @@ Reference article: [Fang K., Bi X.-J., Yin P.-F., Yuan Q., 2018, ApJ, 863, 30](h
 
 ## Usage
 
-The script `pulsar-pipeline` is a wrap scrip around all other programs:
+The script `pulsar-pipeline` is a wrapping script around all other programs:
 
 ```sh
 ./pulsar-pipeline <ra> <dec> <radius> [-j <threads>]
