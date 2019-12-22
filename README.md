@@ -24,7 +24,7 @@ The script `pulsar-pipeline` is a wrap scrip around all other programs:
 
 It accepts three positional arguments: center coordinates `ra`, `dec` and search radius `radius` for pulsar sources, and an optional argument `-j` to specify number of threads for parallel calculation.
 
-**Note** that by default the pipeline will use all threads available.
+**Parallel execution:** Note that by default the pipeline will use all threads available.
 
 The commands below are equivalent to what happens under the hood step by step:
 
