@@ -155,6 +155,11 @@ if __name__ == '__main__':
             pdf.addtablerow(source['JName'], ra, dec, age, dist, edot)
             plt.annotate(source['JName'], xy=(ra, dec),
                          xytext=(ra + radius / 50, dec + radius / 50))
+
+        if "accepted" not in globals():
+            logging.error("no available sources!")
+            plt.close()
+            exit(1)
         plt.legend([accepted, filtered], ['used', 'not used'], framealpha=1)
         plt.savefig(os.path.join(plotdir, "position.eps"))
         pdf.compile()
