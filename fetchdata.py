@@ -74,10 +74,10 @@ def save_data(rawdata):
             if not data['#']:
                 continue
             count += 1
+            RaJD = float(data['RAJD'])
+            DecJD = float(data['DECJD'])
             if data['DIST'] != '*' and data['AGE'] != '*' \
                     and data['EDOT'] != '*':
-                RaJD = float(data['RAJD'])
-                DecJD = float(data['DECJD'])
                 # convert unit from erg/s to m_e c^2/s
                 Edot = float(data['EDOT']) * 1221432.8760283517
                 # convert unit from kpc to pc
@@ -85,6 +85,13 @@ def save_data(rawdata):
                 # convert unit from yr to s
                 Age = float(data['AGE']) * 365.25 * 24 * 60 * 60
 
+                writer.writerow({'JName': data['PSRJ'],
+                                 'Age': Age, 'Dist': Dist, 'Edot': Edot,
+                                 'RaJD': RaJD, 'DecJD': DecJD})
+            else:
+                Edot = data['EDOT']
+                Dist = data['DIST']
+                Age = data['AGE']
                 writer.writerow({'JName': data['PSRJ'],
                                  'Age': Age, 'Dist': Dist, 'Edot': Edot,
                                  'RaJD': RaJD, 'DecJD': DecJD})

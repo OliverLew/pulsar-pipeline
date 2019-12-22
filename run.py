@@ -51,6 +51,9 @@ if __name__ == '__main__':
 
     with open(data_file) as f:
         for source in csv.DictReader(f):
+            if source['Dist'] == "*" or source['Age'] == "*" \
+                    or source['Edot'] == "*":
+                continue
             if float(source['Dist']) > 2e3:
                 continue
             if float(source['Age']) < 1e4 * 365.25 * 24 * 60 * 60:

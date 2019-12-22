@@ -49,20 +49,29 @@ class Pdf():
         self.tablerows = []
 
         self.tableheader = " & ".join(["Source Name",
+                                       "Ra",
+                                       "Dec",
                                        "Age",
                                        "Distance",
                                        "$\\dot{E}$",
-                                       "Ra",
-                                       "Dec"]) + '\\\\\n' + \
+                                       ]) + '\\\\\n' + \
                            " & ".join(["",
+                                       "(degree)",
+                                       "(degree)",
                                        "(yr)",
                                        "(kpc)",
                                        "$(m_ec^2/s)$",
-                                       "(degree)",
-                                       "(degree)"])
+                                       ])
 
-    def addtablerow(self, data):
-        self.tablerows.append(" & ".join(list(data)))
+    def addtablerow(self, name, ra, dec, age, dist, edot):
+        rowstring = [name]
+        rowstring.append("{:.2f}".format(ra))
+        rowstring.append("{:.2f}".format(dec))
+        rowstring.append("*" if age == "*" else "{:.1e}".format(age))
+        rowstring.append("*" if dist == "*" else "{:.2f}".format(dist))
+        rowstring.append("*" if edot == "*" else "{:.2e}".format(edot))
+
+        self.tablerows.append(" & ".join(rowstring))
 
     def addfigure(self, sourcename):
         self.figures.append("\\begin{figure}\n" +
@@ -119,23 +128,31 @@ if __name__ == '__main__':
         for source in csv.DictReader(f):
             ra = float(source['RaJD'])
             dec = float(source['DecJD'])
-            dist = float(source['Dist']) / 1e3
-            age = float(source['Age']) / (365.25 * 24 * 60 * 60)
-            edot = float(source['Edot'])
-            if dist > 2 or age < 1e4:
+            if source['Dist'] != "*":
+                dist = float(source['Dist']) / 1e3
+            else:
+                dist = "*"
+            if source['Age'] != "*":
+                age = float(source['Age']) / (365.25 * 24 * 60 * 60)
+            else:
+                age = "*"
+            if source['Edot'] != "*":
+                edot = float(source['Edot'])
+            else:
+                edot = "*"
+
+            if dist == "*" or age == "*" or edot == "*":
+                filtered, = plt.plot(ra, dec, 'ro')
+            elif dist > 2 or age < 1e4:
                 filtered, = plt.plot(ra, dec, 'ro')
             else:
                 accepted, = plt.plot(ra, dec, 'go')
                 ploteach(source)
                 pdf.addfigure(source['JName'])
+
+            pdf.addtablerow(source['JName'], ra, dec, age, dist, edot)
             plt.annotate(source['JName'], xy=(ra, dec),
                          xytext=(ra + radius / 50, dec + radius / 50))
-            pdf.addtablerow([source['JName'],
-                             "{:.1e}".format(age),
-                             "{:.2f}".format(dist),
-                             "{:.2e}".format(edot),
-                             "{:.2f}".format(ra),
-                             "{:.2f}".format(dec)])
         plt.legend([accepted, filtered], ['used', 'not used'], framealpha=1)
         plt.savefig(os.path.join(plotdir, "position.eps"))
         pdf.compile()
