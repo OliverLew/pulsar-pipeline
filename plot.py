@@ -121,6 +121,8 @@ if __name__ == '__main__':
         plt.figure()
         plt.title("Ra: ${}^\\circ$, Dec: ${}^\\circ$, radius: ${}^\\circ$"
                   .format(ra0, dec0, radius))
+        plt.xlabel("Ra (${}^\\circ$)")
+        plt.ylabel("Dec (${}^\\circ$)")
         plt.xlim((ra0 - radius, ra0 + radius))
         plt.ylim((dec0 - radius, dec0 + radius))
         plt.grid(lw=0.5, ls='--')
