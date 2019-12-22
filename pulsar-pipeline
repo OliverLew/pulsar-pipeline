@@ -28,6 +28,12 @@ parser.add_argument('radius', nargs="?", default="2", help="unit: degree")
 parser.add_argument('-j', '--threads', help="default to maximum available")
 args = parser.parse_args()
 
+if os.path.exists("jobfile"):
+    with open("jobfile") as f:
+        ra, dec, radius = [float(i) for i in f.readline().split()]
+        if float(args.ra) != ra or float(args.dec) != dec \
+                or float(args.radius) != radius:
+            os.remove(os.path.join("result", "data.csv"))
 with open("jobfile", "w") as f:
     f.write("{} {} {}".format(args.ra, args.dec, args.radius))
 
